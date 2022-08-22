@@ -154,7 +154,7 @@ const parsePropsFuncs: Required<{ [key in keyof xarrowPropsType]: Function }> = 
   path: noParseWithUpdatePos,
   curveness: parseNumWithUpdatePos,
   gridBreak: (userProp, _, updatePos) => withUpdate(parseGridBreak(userProp), updatePos),
-  // // gridRadius = strokeWidth * 2, //todo
+  gridRadius: parseNumWithUpdatePos,
   dashness: (userProp, propsRefs) => parseDashness(userProp, propsRefs),
   headShape: (userProp) => parseEdgeShape(userProp),
   tailShape: (userProp) => parseEdgeShape(userProp),
@@ -213,7 +213,7 @@ const defaultProps: Required<xarrowPropsType> = {
   path: 'smooth',
   curveness: 0.8,
   gridBreak: '50%',
-  // gridRadius : strokeWidth * 2, //todo
+  gridRadius: 8,
   dashness: false,
   headShape: 'arrow1',
   tailShape: 'arrow1',
@@ -256,7 +256,7 @@ type parsedXarrowProps = {
   showXarrow: boolean;
   curveness: number;
   gridBreak: { relative: number; abs: number };
-  // gridRadius: number;
+  gridRadius: number;
   dashness: {
     strokeLen: number;
     nonStrokeLen: number;

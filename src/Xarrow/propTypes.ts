@@ -55,6 +55,7 @@ const XarrowPropTypes = {
   showXarrow: PT.bool,
   curveness: PT.number,
   gridBreak: PT.string,
+  gridRadius: PT.number,
   dashness: PT.oneOfType([PT.bool, PT.object]),
   headShape: pSvgEdgeType,
   tailShape: pSvgEdgeType,
