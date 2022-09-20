@@ -1,7 +1,7 @@
 {
   "name": "react-xarrows",
-  "version": "2.0.2",
-  "author": "Eliav Louski",
+  "version": "2.0.3",
+  "author": "Eliav Louski & Alexandr Scherbakov",
   "description": "Draw arrows (or lines) between components in React!",
   "main": "./lib/index.js",
   "module": "./lib/index.js",
