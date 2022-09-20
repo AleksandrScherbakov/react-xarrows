@@ -505,8 +505,7 @@ const CustomizeArrow = () => {
                   endAnchor: "left",
                   showTail: false,
                   zIndex: 0,
-                  _extendSVGcanvas: 100,
-                  _debug: true
+                  _extendSVGcanvas: 20,
               }} /> : null}
             </Xwrapper>
           </div>

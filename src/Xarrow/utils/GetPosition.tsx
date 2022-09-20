@@ -108,7 +108,7 @@ export const getPosition = (xProps: useXarrowPropsResType, mainRef: React.Mutabl
         let headAngel = Math.atan(absDy / absDx);
 
         if (showHead) {
-            x2 -= fHeadSize * (1 - headOffset) * xSign * Math.cos(headAngel);
+            x2 -= fHeadSize * (1 - headOffset) * Math.cos(headAngel) //* xSign;
             y2 -= fHeadSize * (1 - headOffset) * ySign * Math.sin(headAngel);
 
             headAngel *= ySign;
@@ -140,9 +140,9 @@ export const getPosition = (xProps: useXarrowPropsResType, mainRef: React.Mutabl
         }
         if (showHead) {
             if (['left', 'right'].includes(endAnchorPosition)) {
-                xHeadOffset += _headOffset * xSign;
-                x2 -= fHeadSize * (1 - headOffset) * xSign; //same!
-                yHeadOffset += (fHeadSize * xSign) / 2;
+                xHeadOffset += _headOffset //* xSign;
+                x2 -= fHeadSize * (1 - headOffset) //* xSign; //same!
+                yHeadOffset += (fHeadSize) / 2 //* xSign;
                 if (endAnchorPosition === 'left') {
                     headOrient = 0;
                     // if (xSign < 0) headOrient += 180;
@@ -231,8 +231,8 @@ export const getPosition = (xProps: useXarrowPropsResType, mainRef: React.Mutabl
                 cpx1 += (absDx * gridBreak.relative + gridBreak.abs) * xSign;
                 cpx2 -= (absDx * (1 - gridBreak.relative) - gridBreak.abs) * xSign;
                 if (showHead) {
-                    cpx1 -= ((fHeadSize * (1 - headOffset)) / 2) * xSign;
-                    cpx2 += ((fHeadSize * (1 - headOffset)) / 2) * xSign;
+                    cpx1 -= ((fHeadSize * (1 - headOffset)) / 2)// * xSign;
+                    cpx2 += ((fHeadSize * (1 - headOffset)) / 2)// * xSign;
                 }
                 if (showTail) {
                     cpx1 -= ((fTailSize * (1 - tailOffset)) / 2) * xSign;
@@ -322,14 +322,10 @@ export const getPosition = (xProps: useXarrowPropsResType, mainRef: React.Mutabl
         } else {
             const deltaY = Math.abs(y1 - y2);
             const deltaX = Math.abs(x1 - x2);
-            if (deltaY <= 2 * gridRadius) {
-                gridRadius = deltaY / 2
-                arrowPath = `M ${x1} ${y1} 
-              L ${x2 > x1 ? cpx1 : cpx1 + gridRadius} ${cpy1} 
-              a${gridRadius},${gridRadius} 0 0 ${(y2 < y1 && x2 > x1) || (y2 > y1 && x2 < x1) ? '0' : '1'} ${x2 > x1 ? gridRadius : -gridRadius},${y2 < y1 ? -gridRadius : gridRadius}
-              a${gridRadius},${gridRadius} 0 0 ${(y2 < y1 && x2 > x1) || (y2 > y1 && x2 < x1) ? '1' : '0'} ${x2 > x1 ? gridRadius : -gridRadius},${y2 < y1 ? -gridRadius : gridRadius}
-              L ${x2} ${y2}`;
-            } else if (deltaX < gridBreak.abs + 2 * gridRadius || dx < 0) {
+            if (deltaY <= 4 * gridRadius) {
+                gridRadius = deltaY / 4
+            }
+            if (deltaX < gridBreak.abs + 2 * gridRadius || dx < 0) {
                 if (cpx1 >= x1) {
                     arrowPath = `M ${x1} ${y1}
                         L ${cpx1 - gridRadius} ${cpy1}
@@ -341,7 +337,7 @@ export const getPosition = (xProps: useXarrowPropsResType, mainRef: React.Mutabl
                         L ${x2} ${y2}`
                 } else {
                     arrowPath = `M ${x1} ${y1}
-                        L ${cpx1 + gridBreak.abs} ${cpy1} 
+                        L ${x1} ${cpy1} 
                         a ${gridRadius},${gridRadius} 0 1 ${y2 > y1 ? '1' : '0'} 0,${2 * (y2 > y1 ? gridRadius : -gridRadius)} 
                         L ${x1 - deltaX} ${cpy1 + 2 * (y2 > y1 ? gridRadius : -gridRadius)} 
                         a ${gridRadius},${gridRadius} 0 0 ${y2 > y1 ? '0' : '1'} ${-gridRadius},${y2 > y1 ? gridRadius : -gridRadius} 
