@@ -3076,11 +3076,6 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
-"@types/prop-types@^15.7.3":
-  version "15.7.4"
-  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
-  integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
-
 "@types/q@^1.5.1":
   version "1.5.4"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
@@ -12097,14 +12092,8 @@ react-transition-group@^4.4.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-xarrows@latest:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-xarrows/-/react-xarrows-2.0.0.tgz#de3149465879c4ba8bf58329e01a235fbadd77c9"
-  integrity sha512-KfX1DOp/lH3VoKvdBts8xW4JK73KNBa/Xa1/Zlj8etmkXTTsJZWz5qwu10chhli69ZlzJurQgjtM1LLGiPgF3Q==
-  dependencies:
-    "@types/prop-types" "^15.7.3"
-    lodash "^4.17.21"
-    prop-types "^15.7.2"
+"react-xarrows@file:../lib":
+  version "0.0.0"
 
 react-zoom-pan-pinch@^1.6.1:
   version "1.6.1"

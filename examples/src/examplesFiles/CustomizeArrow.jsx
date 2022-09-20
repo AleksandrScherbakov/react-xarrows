@@ -248,9 +248,9 @@ const CustomizeArrow = () => {
   const [dashed, setDashed] = useState(false);
   const [animation, setAnimation] = useState(1);
   const [path, setPath] = useState('smooth');
-  const [startLabel, setStartLabel] = useState("I'm start label");
-  const [middleLabel, setMiddleLabel] = useState('middleLabel');
-  const [endLabel, setEndLabel] = useState('fancy end label');
+  const [startLabel, setStartLabel] = useState("");
+  const [middleLabel, setMiddleLabel] = useState('');
+  const [endLabel, setEndLabel] = useState('');
   const [_extendSVGcanvas, setExtendSVGcanvas] = useState(0);
   const [_debug, set_Debug] = useState(false);
   const [_cpx1Offset, set_Cpx1] = useState(0);
@@ -488,7 +488,26 @@ const CustomizeArrow = () => {
             <Xwrapper>
               <Box box={box} />
               <Box box={box2} />
-              {showArrow ? <Xarrow {...props} /> : null}
+              {showArrow ? <Xarrow {...{
+                  start: 'box1',
+                  end: box2.ref,
+                  lineColor: "#707070",
+                  headColor: "#707070",
+                  strokeWidth: 1.5,
+                  headSize: 4,
+                  path: "grid",
+                  gridBreak: "0%20",
+                  gridRadius: 10,
+                  arrowBodyProps: {
+                      strokeLinejoin: "round",
+                  },
+                  startAnchor: "right",
+                  endAnchor: "left",
+                  showTail: false,
+                  zIndex: 0,
+                  _extendSVGcanvas: 100,
+                  _debug: true
+              }} /> : null}
             </Xwrapper>
           </div>
           {/*/!* todo: add generated code preview *!/ */}
