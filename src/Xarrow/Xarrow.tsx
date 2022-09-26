@@ -9,6 +9,20 @@ const log = console.log;
 
 const Xarrow: React.FC<xarrowPropsType> = (props: xarrowPropsType) => {
   // log('xarrow update');
+  const initiallyModifiedProps = {...props};
+  if (initiallyModifiedProps.relationType === 'oo') {
+    initiallyModifiedProps.startAnchor = 'right'
+    initiallyModifiedProps.endAnchor = 'right'
+  } else if(initiallyModifiedProps.relationType === 'hh') {
+    initiallyModifiedProps.startAnchor = 'left'
+    initiallyModifiedProps.endAnchor = 'left'
+  } else if (initiallyModifiedProps.relationType === 'ho'){
+    initiallyModifiedProps.startAnchor = 'right'
+    initiallyModifiedProps.endAnchor ='left'
+  } else if (initiallyModifiedProps.relationType === 'oh'){
+    initiallyModifiedProps.startAnchor = 'right'
+    initiallyModifiedProps.endAnchor = 'left'
+  }
 
   const mainRef = useRef({
     svgRef: useRef<SVGSVGElement>(null),
@@ -21,7 +35,7 @@ const Xarrow: React.FC<xarrowPropsType> = (props: xarrowPropsType) => {
   });
   const { svgRef, lineRef, headRef, tailRef, lineDrawAnimRef, lineDashAnimRef, headOpacityAnimRef } = mainRef.current;
   useContext(XarrowContext);
-  const xProps = useXarrowProps(props, mainRef.current);
+  const xProps = useXarrowProps(initiallyModifiedProps, mainRef.current);
   const [propsRefs] = xProps;
 
   let {
@@ -50,7 +64,7 @@ const Xarrow: React.FC<xarrowPropsType> = (props: xarrowPropsType) => {
     shouldUpdatePosition,
   } = propsRefs;
 
-  animateDrawing = props.animateDrawing as number;
+  animateDrawing = initiallyModifiedProps.animateDrawing as number;
   const [drawAnimEnded, setDrawAnimEnded] = useState(!animateDrawing);
 
   const [, setRender] = useState({});

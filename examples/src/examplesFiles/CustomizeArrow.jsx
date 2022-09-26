@@ -272,50 +272,6 @@ const CustomizeArrow = () => {
 
     const [relationType, setRelationType] = useState(RELATION_TYPES.oh)
 
-    const relationTypeProps = useMemo(() => {
-        if(relationType === RELATION_TYPES.oh) {
-            return {
-                startAnchor: 'right',
-                endAnchor: 'left',
-                arrowBodyProps: {
-
-                }
-            }
-        }
-        if(relationType === RELATION_TYPES.ho) {
-            return {
-                startAnchor: 'right',
-                endAnchor: 'left',
-                arrowBodyProps: {
-
-                }
-            }
-        }
-        if(relationType === RELATION_TYPES.hh) {
-            return {
-                startAnchor: 'left',
-                endAnchor: 'left',
-                arrowBodyProps: {
-
-                }
-            }
-        }
-        if(relationType === RELATION_TYPES.oo) {
-            return {
-                startAnchor: 'right',
-                endAnchor: 'right',
-                arrowBodyProps: {
-
-                }
-            }
-        }
-        return {
-            arrowBodyProps: {
-
-            }
-        }
-    }, [relationType])
-
     // const [headOffset, setHeadOffset] = useState(0.25);
     // const [tailOffset, setTailOffset] = useState(0.25);
 
@@ -360,17 +316,7 @@ const CustomizeArrow = () => {
             ),
         },
         _debug,
-        relationType,
-        ...relationTypeProps,
-        arrowBodyProps: {
-            strokeLinejoin: "round",
-            startAnchor: "right",
-            endAnchor: "left",
-            showTail: false,
-            zIndex: 0,
-            _extendSVGcanvas: 20,
-            ...relationTypeProps.arrowBodyProps
-        },
+        relationType
     };
 
     return (

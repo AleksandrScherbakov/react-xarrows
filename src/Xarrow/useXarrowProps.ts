@@ -155,7 +155,7 @@ const parsePropsFuncs: Required<{ [key in keyof xarrowPropsType]: Function }> = 
   curveness: parseNumWithUpdatePos,
   gridBreak: (userProp, _, updatePos) => withUpdate(parseGridBreak(userProp), updatePos),
   gridRadius: parseNumWithUpdatePos,
-  relationType:  (userProp, _, updatePos) => withUpdate(noParse(userProp), updatePos),
+  relationType: (userProp, _, updatePos) => withUpdate(noParse(userProp), updatePos),
   dashness: (userProp, propsRefs) => parseDashness(userProp, propsRefs),
   headShape: (userProp) => parseEdgeShape(userProp),
   tailShape: (userProp) => parseEdgeShape(userProp),
