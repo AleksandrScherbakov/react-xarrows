@@ -3,7 +3,7 @@ import {
   anchorCustomPositionType,
   anchorType,
   labelsType,
-  pathType,
+  pathType, relationType,
   svgCustomEdgeType,
   svgEdgeShapeType,
   svgElemType,
@@ -155,6 +155,7 @@ const parsePropsFuncs: Required<{ [key in keyof xarrowPropsType]: Function }> = 
   curveness: parseNumWithUpdatePos,
   gridBreak: (userProp, _, updatePos) => withUpdate(parseGridBreak(userProp), updatePos),
   gridRadius: parseNumWithUpdatePos,
+  relationType:  (userProp, _, updatePos) => withUpdate(noParse(userProp), updatePos),
   dashness: (userProp, propsRefs) => parseDashness(userProp, propsRefs),
   headShape: (userProp) => parseEdgeShape(userProp),
   tailShape: (userProp) => parseEdgeShape(userProp),
@@ -214,6 +215,7 @@ const defaultProps: Required<xarrowPropsType> = {
   curveness: 0.8,
   gridBreak: '50%',
   gridRadius: 8,
+  relationType: 'oh',
   dashness: false,
   headShape: 'arrow1',
   tailShape: 'arrow1',
@@ -257,6 +259,7 @@ type parsedXarrowProps = {
   curveness: number;
   gridBreak: { relative: number; abs: number };
   gridRadius: number;
+  relationType: relationType;
   dashness: {
     strokeLen: number;
     nonStrokeLen: number;

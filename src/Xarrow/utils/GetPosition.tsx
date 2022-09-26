@@ -24,6 +24,7 @@ export const getPosition = (xProps: useXarrowPropsResType, mainRef: React.Mutabl
         curveness,
         gridBreak,
         gridRadius,
+        relationType,
         headShape,
         tailShape,
         _extendSVGcanvas,
@@ -312,7 +313,6 @@ export const getPosition = (xProps: useXarrowPropsResType, mainRef: React.Mutabl
     const labelStartPos = {x: bzx(0.01), y: bzy(0.01)};
     const labelMiddlePos = {x: bzx(0.5), y: bzy(0.5)};
     const labelEndPos = {x: bzx(0.99), y: bzy(0.99)};
-
     let arrowPath;
     if (path === 'grid') {
         // todo: support gridRadius
@@ -325,7 +325,14 @@ export const getPosition = (xProps: useXarrowPropsResType, mainRef: React.Mutabl
             if (deltaY <= 4 * gridRadius) {
                 gridRadius = deltaY / 4
             }
-            if (deltaX < gridBreak.abs + 2 * gridRadius || dx < 0) {
+            if (relationType === 'hh') {
+                arrowPath = `M ${x1} ${y1}
+                                  L ${Math.min(x1, x2) - gridRadius} ${cpy1}
+                                  a${gridRadius},${gridRadius} 0 0 ${y2 > y1 ? "0" : "1"} ${-gridRadius},${y2 < y1 ? -gridRadius : gridRadius}
+                                  L ${Math.min(x1, x2) - 2 * gridRadius} ${y2 < y1 ? cpy2 + gridRadius : cpy2 - gridRadius}
+                                  a${gridRadius},${gridRadius} 0 0 ${y2 > y1 ? "0" : "1"} ${gridRadius},${y2 < y1 ? -gridRadius : gridRadius}
+                                  L ${x2} ${y2}`;
+            } else if (deltaX < gridBreak.abs + 2 * gridRadius || dx < 0) {
                 if (cpx1 >= x1) {
                     arrowPath = `M ${x1} ${y1}
                         L ${cpx1 - gridRadius} ${cpy1}
@@ -344,14 +351,15 @@ export const getPosition = (xProps: useXarrowPropsResType, mainRef: React.Mutabl
                         L ${x1 - deltaX - gridRadius} ${y2 > y1 ? y2 - gridRadius : y2 + gridRadius} 
                         a ${gridRadius},${gridRadius} 0 0 ${y2 > y1 ? '0' : '1'} ${gridRadius},${y2 > y1 ? gridRadius : -gridRadius}
                         L ${x2} ${y2}`
+
                 }
             } else {
                 arrowPath = `M ${x1} ${y1} 
-              L ${x2 > x1 ? cpx1 : cpx1 + gridRadius} ${cpy1} 
-              a${gridRadius},${gridRadius} 0 0 ${(y2 < y1 && x2 > x1) || (y2 > y1 && x2 < x1) ? '0' : '1'} ${x2 > x1 ? gridRadius : -gridRadius},${y2 < y1 ? -gridRadius : gridRadius}
-              L ${x2 > x1 ? cpx2 + gridRadius : cpx2} ${y2 < y1 ? cpy2 + gridRadius : cpy2 - gridRadius}
-              a${gridRadius},${gridRadius} 0 0 ${(y2 < y1 && x2 > x1) || (y2 > y1 && x2 < x1) ? '1' : '0'} ${x2 > x1 ? gridRadius : -gridRadius},${y2 < y1 ? -gridRadius : gridRadius}
-              L ${x2} ${y2}`;
+                              L ${x2 > x1 ? cpx1 : cpx1 + gridRadius} ${cpy1} 
+                              a${gridRadius},${gridRadius} 0 0 ${(y2 < y1 && x2 > x1) || (y2 > y1 && x2 < x1) ? '0' : '1'} ${x2 > x1 ? gridRadius : -gridRadius},${y2 < y1 ? -gridRadius : gridRadius}
+                              L ${x2 > x1 ? cpx2 + gridRadius : cpx2} ${y2 < y1 ? cpy2 + gridRadius : cpy2 - gridRadius}
+                              a${gridRadius},${gridRadius} 0 0 ${(y2 < y1 && x2 > x1) || (y2 > y1 && x2 < x1) ? '1' : '0'} ${x2 > x1 ? gridRadius : -gridRadius},${y2 < y1 ? -gridRadius : gridRadius}
+                              L ${x2} ${y2}`;
             }
         }
     } else if (path === 'smooth') arrowPath = `M ${x1} ${y1} C ${cpx1} ${cpy1}, ${cpx2} ${cpy2}, ${x2} ${y2}`;

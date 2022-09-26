@@ -21,6 +21,7 @@ export type xarrowPropsType = {
   curveness?: number;
   gridBreak?: string;
   gridRadius?: number;
+  relationType?: relationType;
   dashness?:
     | boolean
     | {
@@ -64,6 +65,7 @@ export type labelsType = {
   end?: labelType;
 };
 export type labelType = JSX.Element | string;
+export type relationType = 'oh' | 'ho' | 'hh' | 'oo'
 
 export type svgCustomEdgeType = {
   svgElem: JSX.IntrinsicElements[keyof ReactSVG];

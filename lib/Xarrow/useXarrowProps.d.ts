@@ -1,5 +1,5 @@
 import React from 'react';
-import { anchorCustomPositionType, labelsType, pathType, svgCustomEdgeType, svgElemType, xarrowPropsType } from '../types';
+import { anchorCustomPositionType, labelsType, pathType, relationType, svgCustomEdgeType, svgElemType, xarrowPropsType } from '../types';
 import { dimensionType } from '../privateTypes';
 declare type parsedXarrowProps = {
     shouldUpdatePosition: React.MutableRefObject<boolean>;
@@ -25,6 +25,7 @@ declare type parsedXarrowProps = {
         abs: number;
     };
     gridRadius: number;
+    relationType: relationType;
     dashness: {
         strokeLen: number;
         nonStrokeLen: number;

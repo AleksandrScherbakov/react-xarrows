@@ -27,6 +27,7 @@ export declare const getPosition: (xProps: readonly [{
         abs: number;
     };
     gridRadius: number;
+    relationType: import("../..").relationType;
     dashness: {
         strokeLen: number;
         nonStrokeLen: number;

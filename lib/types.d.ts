@@ -20,6 +20,7 @@ export declare type xarrowPropsType = {
     curveness?: number;
     gridBreak?: string;
     gridRadius?: number;
+    relationType?: relationType;
     dashness?: boolean | {
         strokeLen?: number;
         nonStrokeLen?: number;
@@ -62,6 +63,7 @@ export declare type labelsType = {
     end?: labelType;
 };
 export declare type labelType = JSX.Element | string;
+export declare type relationType = 'oh' | 'ho' | 'hh' | 'oo';
 export declare type svgCustomEdgeType = {
     svgElem: JSX.IntrinsicElements[keyof ReactSVG];
     offsetForward?: number;
