@@ -109,7 +109,7 @@ export const getPosition = (xProps: useXarrowPropsResType, mainRef: React.Mutabl
         let headAngel = Math.atan(absDy / absDx);
 
         if (showHead) {
-            x2 -= fHeadSize * (1 - headOffset) * Math.cos(headAngel) //* xSign;
+            x2 -= fHeadSize * (1 - headOffset) * Math.cos(headAngel) //*xSign;
             y2 -= fHeadSize * (1 - headOffset) * ySign * Math.sin(headAngel);
 
             headAngel *= ySign;
@@ -141,15 +141,15 @@ export const getPosition = (xProps: useXarrowPropsResType, mainRef: React.Mutabl
         }
         if (showHead) {
             if (['left', 'right'].includes(endAnchorPosition)) {
-                xHeadOffset += _headOffset //* xSign;
-                x2 -= fHeadSize * (1 - headOffset) //* xSign; //same!
-                yHeadOffset += (fHeadSize) / 2 //* xSign;
+                xHeadOffset += _headOffset * (relationType == 'oo' ? -1 : 1) // * xSign;
+                x2 -= fHeadSize * (1 - headOffset) * (relationType == 'oo' ? -1 : 1) // * xSign; //same!
+                yHeadOffset += (fHeadSize) / 2 * (relationType == 'oo' ? -1 : 1) // * xSign;
                 if (endAnchorPosition === 'left') {
                     headOrient = 0;
-                    // if (xSign < 0) headOrient += 180;
+                    if (relationType === 'oo') headOrient += 180;
                 } else {
                     headOrient = 180;
-                    if (xSign > 0) headOrient += 180;
+                    if (xSign > 0 && relationType !== 'oo') headOrient += 180;
                 }
             } else if (['top', 'bottom'].includes(endAnchorPosition)) {
                 xHeadOffset += (fHeadSize * -ySign) / 2;
@@ -331,6 +331,13 @@ export const getPosition = (xProps: useXarrowPropsResType, mainRef: React.Mutabl
                                   a${gridRadius},${gridRadius} 0 0 ${y2 > y1 ? "0" : "1"} ${-gridRadius},${y2 < y1 ? -gridRadius : gridRadius}
                                   L ${Math.min(x1, x2) - 2 * gridRadius} ${y2 < y1 ? cpy2 + gridRadius : cpy2 - gridRadius}
                                   a${gridRadius},${gridRadius} 0 0 ${y2 > y1 ? "0" : "1"} ${gridRadius},${y2 < y1 ? -gridRadius : gridRadius}
+                                  L ${x2} ${y2}`;
+            } else if (relationType === 'oo') {
+                arrowPath = `M ${x1} ${y1}
+                                  L ${Math.max(x1, x2) + gridRadius} ${cpy1}
+                                  a${gridRadius},${gridRadius} 0 0 ${y2 > y1 ? "1" : "0"} ${gridRadius},${y2 < y1 ? -gridRadius : gridRadius}
+                                  L ${Math.max(x1, x2) + 2 * gridRadius} ${y2 < y1 ? cpy2 + gridRadius : cpy2 - gridRadius}
+                                  a${gridRadius},${gridRadius} 0 0 ${y2 > y1 ? "1" : "0"} ${-gridRadius},${y2 < y1 ? -gridRadius : gridRadius}
                                   L ${x2} ${y2}`;
             } else if (deltaX < gridBreak.abs + 2 * gridRadius || dx < 0) {
                 if (cpx1 >= x1) {
